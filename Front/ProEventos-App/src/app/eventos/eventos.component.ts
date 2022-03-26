@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { EventoService } from '../services/Evento.service';
 
 
 @Component({
@@ -40,7 +40,7 @@ export class EventosComponent implements OnInit {
           evento.local.toLocaleLowerCase().indexOf(filtrarPor) !== -1
       );
   }
-  constructor(private http: HttpClient) { }
+  constructor(private eventoService : EventoService) { }
 
   ngOnInit(): void {
     // método que é chamado antes do html ser formado
@@ -49,7 +49,7 @@ export class EventosComponent implements OnInit {
 
   public getEventos(): void {
 
-    this.http.get('https://localhost:5001/api/eventos').subscribe(
+    this.eventoService.getEventos().subscribe(
       response => {
         this.eventos = response;
         this.eventosFiltrados = this.eventos;

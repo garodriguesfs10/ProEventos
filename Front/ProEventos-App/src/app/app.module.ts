@@ -10,6 +10,7 @@ import { PalestrantesComponent } from './palestrantes/palestrantes.component';
 import { NavComponent } from './nav/nav.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import {  BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EventoService } from './services/Evento.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,7 @@ import {  BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CollapseModule.forRoot(),
     FormsModule
   ],
-  providers: [],
+  providers: [EventoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
