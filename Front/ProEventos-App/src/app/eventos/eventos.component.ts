@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Evento } from '../models/Evento';
 import { EventoService } from '../services/Evento.service';
 
 
@@ -9,8 +10,8 @@ import { EventoService } from '../services/Evento.service';
 })
 export class EventosComponent implements OnInit {
 
-  public eventos: any = [];
-  public eventosFiltrados: any = [];
+  public eventos: Evento[] = [];
+  public eventosFiltrados: Evento[] = [];
 
   widthImg: number = 100;
   marginImg: number = 2;
@@ -30,7 +31,7 @@ export class EventosComponent implements OnInit {
       this.filtrarEventos(this.filtroListaEvento) : this.eventos;
   }
 
-  filtrarEventos(filtrarPor: string): any
+  public filtrarEventos(filtrarPor: string): Evento[]
   {
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.eventos.filter
@@ -40,9 +41,10 @@ export class EventosComponent implements OnInit {
           evento.local.toLocaleLowerCase().indexOf(filtrarPor) !== -1
       );
   }
+
   constructor(private eventoService : EventoService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     // método que é chamado antes do html ser formado
     this.getEventos();
   }
@@ -50,15 +52,15 @@ export class EventosComponent implements OnInit {
   public getEventos(): void {
 
     this.eventoService.getEventos().subscribe(
-      response => {
-        this.eventos = response;
+      (_eventos : Evento[]) => {
+        this.eventos = _eventos;
         this.eventosFiltrados = this.eventos;
       },
       error => console.log(error)
     );
   }
 
-  public metodoMostrarImagem(): void {
+  public metodoMostrarImagem() : void {
     this.mostrarImagem = !this.mostrarImagem;
   }
 }

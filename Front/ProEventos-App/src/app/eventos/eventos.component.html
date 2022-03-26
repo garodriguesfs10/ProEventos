@@ -16,6 +16,7 @@
     <tr>
       <th>
         <button type="button" class="btn btn-outline-light btn-sm" (click)="metodoMostrarImagem()">
+          <i class="{{mostrarImagem ? 'fa fa-eye-slash' : 'fa fa-eye'}}"></i>
           {{mostrarImagem ? "Ocultar Imagens" : "Exibir Imagens"}}
         </button>
       </th>
@@ -37,15 +38,19 @@
           [style.width.px]="widthImg"
           [style.margin.px]="marginImg">
         </td>
-        <td>{{evento.eventoId}}</td>
+        <td>{{evento.id}}</td>
         <td>{{evento.tema}}</td>
         <td>{{evento.local}}</td>
-        <td>{{evento.dataEvento}}</td>
+        <td>{{evento.dataEvento | DateTimeFormatPipe}}</td>
         <td>{{evento.qtdPessoas}}</td>
-        <td>{{evento.lote}}</td>
         <td>
-          <button type="button" class="btn btn-primary btn-sm me-md-2">Editar</button>
-          <button type="button" class="btn btn-danger btn-sm">Excluir</button>
+          <div *ngIf="evento.lotes">
+            <p *ngFor="let item of evento.lotes">{{item.nome}} - Qtd: {{item.quantidade}}</p>
+          </div>
+        </td>
+        <td>
+          <button type="button" class="btn btn-primary btn-sm me-md-2" tooltip="Editar"><i class="fa fa-edit"></i></button>
+          <button type="button" class="btn btn-danger btn-sm" tooltip="Excluir"><i class="fa fa-trash"></i></button>
         </td>
       </tr>
   </tbody>
